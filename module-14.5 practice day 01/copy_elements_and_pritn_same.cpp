@@ -15,21 +15,15 @@ int main()
    
     while(!st.empty())
     {
-        int k=st.top();
+        newst.push(st.top());
         st.pop();
-        if(st.empty())
-        {
-            newst.push(k);
-            break;
-        }
-        newst.push(k);
     }
 
    st = newst;
 
     while (!st.empty())
     {
-        cout << st.top() << endl;
+        cout << st.top() << " ";
         st.pop();
     }
     return 0;
