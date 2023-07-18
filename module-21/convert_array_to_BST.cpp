@@ -19,10 +19,8 @@ Node *convert(int a[], int n, int l, int r)
     if(l>r) return NULL;
     int mid = (l + r) / 2;
     Node *root = new Node(a[mid]);
-    Node *rootleft = convert(a, n, l, mid - 1);
-    Node *rootright = convert(a, n, mid + 1, r);
-    root->left = rootleft;
-    root->right = rootright;
+    root->left  = convert(a, n, l, mid - 1);
+    root->right = convert(a, n, mid + 1, r);
     return root;
 }
 void level_order(Node *root)
