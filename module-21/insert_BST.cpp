@@ -14,105 +14,60 @@ public:
         this->right = NULL;
     }
 };
-Node *input_tree()
+void insert(Node *& root ,int val)
 {
-    Node *root;
-    int val;
-    cin >> val;
-    if (val == -1)
-        root = NULL;
-    else
-        root = new Node(val);
-
-    queue<Node *> q;
-    if (root)
-        q.push(root);
-    while (!q.empty())
+    Node * newnode = new Node(val);
+    if(root == NULL) 
     {
-        Node *parent = q.front();
-        q.pop();
-        Node *left_val;
-        Node *right_val;
-        int l, r;
-        cin >> l >> r;
-        if (l == -1)
-            left_val = NULL;
-        else
-            left_val = new Node(l);
-        if (r == -1)
-            right_val = NULL;
-        else
-            right_val = new Node(r);
-        parent->left = left_val;
-        parent->right = right_val;
-        if (parent->left)
-            q.push(parent->left);
-        if (parent->right)
-            q.push(parent->right);
-    }
-    return root;
-}
-void  insert_root(Node *&root, int x)
-{
-    if (root == NULL)
-    {
-        root = new Node(x);
+        root = newnode;
         return;
     }
-
-    if (x < root->val)
+    Node * cur = root;
+    Node * par = NULL;
+    while(cur != NULL)
     {
-        if (root->left == NULL)
+        if ( newnode->val < cur->val)
         {
-            root->left = new Node(x);
+            par = cur ;
+            cur= cur->left;
         }
-        else{
-            insert_root(root->left,x);
+        else 
+        {
+            par = cur ;
+            cur = cur->right;
         }
     }
-    else
+    if (newnode->val < par->val)
     {
-        if (root->right == NULL)
-        {
-            root->right = new Node(x);
-        }
-        else{
-            insert_root(root->right,x);
-        }
+        par->left= newnode;
+    }
+    else 
+    {
+        par->right = newnode;
     }
 }
-void level_order(Node *root)
+void level_order(Node * root )
 {
-    queue<Node *> q;
+    if (root == NULL) return;
+    queue<Node*>q;
     q.push(root);
-    while (!q.empty())
+    while(!q.empty())
     {
-
-        // 1 . ber kore niya aste hobe
-        Node *f = q.front();
+        Node * f = q.front();
         q.pop();
-
-        // 2 . jabotiyo kaj sesh korte hobe eikhane
-        cout << f->val << " ";
-
-        // 3. children gula ke line ante hobe
-        if (f->left)
-            q.push(f->left);
-        if (f->right)
-            q.push(f->right);
+        cout<<f->val<<" ";
+        if (f->left) q.push(f->left);
+        if(f->right) q.push(f->right);
     }
 }
-
 int main()
 {
-    Node *root = input_tree();
-    int x;
-    cin >> x;
+    Node *root = NULL;
+    insert(root, 50);
+    insert(root, 40);
+    insert(root, 60);
+    insert(root, 30);
+    insert(root, 35);
     level_order(root);
-    cout << endl;
-    insert_root(root,x);
-    cout << "After insert new node : \n";
-    level_order(root);
-
     return 0;
 }
