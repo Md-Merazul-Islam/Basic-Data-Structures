@@ -15,7 +15,7 @@ public:
     }
 };
 
-    void insert(Node*& root, int key)
+void insert(Node*& root, int key)
 {
     Node* node = new Node(key);
     if (!root) {
@@ -40,6 +40,7 @@ public:
         prev->right = node;
 
 }
+
 void level_order(Node * root )
 {
     if (root == NULL) return;
