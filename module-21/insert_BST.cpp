@@ -16,10 +16,10 @@ public:
 };
 void insert(Node *& root ,int val)
 {
-    Node * newnode = new Node(val);
+    
     if(root == NULL) 
     {
-        root = newnode;
+        root = new Node(val);
         return;
     }
     Node * cur = root;
