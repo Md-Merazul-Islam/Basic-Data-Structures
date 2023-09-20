@@ -14,37 +14,31 @@ public:
         this->right = NULL;
     }
 };
-void insert(Node *& root ,int val)
+
+    void insert(Node*& root, int key)
 {
-    
-    if(root == NULL) 
-    {
-        root = new Node(val);
+    Node* node = new Node(key);
+    if (!root) {
+        root = node;
         return;
     }
-    Node * cur = root;
-    Node * par = NULL;
-    while(cur != NULL)
-    {
-        if ( newnode->val < cur->val)
-        {
-            par = cur ;
-            cur= cur->left;
+    Node* prev = NULL;
+    Node* temp = root;
+    while (temp) {
+        if (temp->val > key) {
+            prev = temp;
+            temp = temp->left;
         }
-        else 
-        {
-            par = cur ;
-            cur = cur->right;
+        else if (temp->val < key) {
+            prev = temp;
+            temp = temp->right;
         }
     }
-    if (newnode->val < par->val)
-    {
-        par->left= newnode;
-    }
-    else 
-    {
-        par->right = newnode;
-    }
+    if (prev->val > key)
+        prev->left = node;
+    else
+        prev->right = node;
+
 }
 void level_order(Node * root )
 {
